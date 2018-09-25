@@ -1,0 +1,17 @@
+{
+    "name": "stijn/yamyam",
+    "authors": [{
+            "name": "RavingKoala",
+            "email": "stijnvb@hotmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Egbert Sluiter",
+            "email": "ejsluiter@gmail.com",
+            "homepage": "http://egbert.media"
+        }
+    ],
+    "require": {
+        "slim/slim": "^3.0"
+    }
+}

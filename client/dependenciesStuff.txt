@@ -1,0 +1,10 @@
+necessary:
+- underscore js
+- slim
+- scss
+- mpdf
+- webpack
+- composer
+- vue js
+- fira sans
+- open sans
