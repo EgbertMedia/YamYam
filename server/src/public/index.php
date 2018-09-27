@@ -6,6 +6,12 @@
 
     $files = scandir('../controller');
 
+	spl_autoload_register(function($class) {
+        if (file_exists('../model/'.lcfirst($class).'.php')) {
+            require_once '../model/'.lcfirst($class).'.php';
+        }
+	});
+
     // Load all controllers
     foreach ($files as $key => $value) {
         if (!is_dir($value)) {
