@@ -39,7 +39,7 @@ class Database {
 	 * @return int Number of affected rows
 	 */
 	public function exec() {
-		return $this->stmt->exec();
+		return $this->stmt->execute();
 	}
 
 	/**
