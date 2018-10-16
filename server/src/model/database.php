@@ -34,6 +34,18 @@ class Database {
 	}
 
 	/**
+	 * Function to bind param
+	 *
+	 * @param  string "name of param to bind 	$name
+	 * @param  "value of param to bind 	$value
+	 * @param  "type of param to bind	$type
+	 */
+	public function bind($name, $value, $type) {
+		$this->stmt->bindParam($name, $value, $type);
+		$this->stmt->debugDumpParams();
+	}
+
+	/**
 	 * Exec last prepared statement
 	 *
 	 * @return int Number of affected rows
