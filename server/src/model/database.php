@@ -60,7 +60,7 @@ class Database {
 	 * @return array Array of result of last statement
 	 */
 	public function getAll() {
-		return $this->stmt->fetchAll();
+		return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	/**
