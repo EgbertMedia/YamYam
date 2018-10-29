@@ -37,8 +37,8 @@ class Database {
 	 * Function to bind param
 	 *
 	 * @param  string "name of param to bind 	$name
-	 * @param  "value of param to bind 	$value
-	 * @param  "type of param to bind	$type
+	 * @param  string "value of param to bind 	$value
+	 * @param  string "type of param to bind	$type
 	 */
 	public function bind($name, $value, $type) {
 		$this->stmt->bindParam($name, $value, $type);
