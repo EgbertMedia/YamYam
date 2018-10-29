@@ -42,7 +42,6 @@ class Database {
 	 */
 	public function bind($name, $value, $type) {
 		$this->stmt->bindParam($name, $value, $type);
-		$this->stmt->debugDumpParams();
 	}
 
 	/**
