@@ -43,6 +43,29 @@ abstract class RestController
 	}
 
 	/**
+	 * Register "single" route
+	 */
+	protected function registerSingle() {
+		$this->app->get('/'.$this->tableName.'/{id}', function (Request $request, Response $response, array $args) {
+			$tableName = explode('/', $request->getRequestTarget())[1];
+
+			$response = $response->withHeader('Content-type', 'application/json');
+
+			$ucstring = ucfirst($tableName);
+			$product = new $ucstring($args['id']);
+			$result = $product->getSelf();
+
+			if (isset($result['error'])) {
+				$response = $response->withJson($result, 500);
+			} else {
+				$response = $response->withJson($result, 200);
+			}
+
+			return $response;
+		});
+	}
+
+	/**
 	 * Register "delete" route
 	 */
 	protected function registerDelete() {

@@ -52,26 +52,7 @@ class ProductController extends RestController
 		});
 	}
 
-	/**
-	 * Register "single" route
-	 */
-	private function registerSingle() {
-		$this->app->get('/product/{id}', function (Request $request, Response $response, array $args) {
 
-			$response = $response->withHeader('Content-type', 'application/json');
-
-			$product = new Product($args['id']);
-			$result = $product->getSelf();
-
-			if (isset($result['error'])) {
-				$response = $response->withJson($result, 500);
-			} else {
-				$response = $response->withJson($result, 200);
-			}
-
-			return $response;
-		});
-	}
 
 
 	/**
