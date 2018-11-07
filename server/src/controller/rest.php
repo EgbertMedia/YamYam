@@ -20,6 +20,27 @@ abstract class RestController
 	*/
 	abstract protected function getTableName();
 
+	/**
+	 * Register "all" route
+	 */
+	protected function registerAll() {
+		$this->app->get('/'.$this->tableName.'/all', function (Request $request, Response $response) {
+			$tableName = explode('/', $request->getRequestTarget())[1];
+
+			$response = $response->withHeader('Content-type', 'application/json');
+
+			$ucstring = ucfirst($tableName);
+			$result = $ucstring::getAll();
+
+			if (isset($result['error'])) {
+				$response = $response->withJson($result, 500);
+			} else {
+				$response = $response->withJson($result, 200);
+			}
+
+			return $response;
+		});
+	}
 
 	/**
 	 * Register "delete" route

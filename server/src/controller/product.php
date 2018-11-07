@@ -53,26 +53,6 @@ class ProductController extends RestController
 	}
 
 	/**
-	 * Register "all" route
-	 */
-	private function registerAll() {
-		$this->app->get('/product/all', function (Request $request, Response $response) {
-
-			$response = $response->withHeader('Content-type', 'application/json');
-
-			$result = Product::getAll();
-
-			if (isset($result['error'])) {
-				$response = $response->withJson($result, 500);
-			} else {
-				$response = $response->withJson($result, 200);
-			}
-
-			return $response;
-		});
-	}
-
-	/**
 	 * Register "single" route
 	 */
 	private function registerSingle() {
