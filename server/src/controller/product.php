@@ -6,8 +6,14 @@ use \Psr\Http\Message\ResponseInterface as Response;
 /**
  * Controller for product table
  */
-class ProductController
+class ProductController extends RestController
 {
+	/**
+	 * Name of table in database
+	 *
+	 * @var string
+	 */
+	protected $tableName = 'product';
 
 	/**
 	 * Construct
@@ -17,6 +23,8 @@ class ProductController
 	function __construct($app) {
 
 		$this->app = $app;
+
+		parent::__construct($this->tableName);
 
 		$this->registerNew();
 
@@ -39,7 +47,7 @@ class ProductController
 		$this->app->post('/product', function (Request $request, Response $response) {
 
 			$response = $response->withHeader('Content-type', 'application/json');
-			$result = Product::create($_POST['name'], $_POST['price'], $_POST['product_id']);#
+			$result = Product::create($_POST['name'], $_POST['price'], $_POST['product_id']);
 			return $result;
 		});
 	}
@@ -85,25 +93,6 @@ class ProductController
 		});
 	}
 
-	/**
-	 * Register "delete" route
-	 */
-	private function registerDelete() {
-		$this->app->delete('/product/{id}', function (Request $request, Response $response, array $args) {
-			$response = $response->withHeader('Content-type', 'application/json');
-
-			$product = new Product($args['id']);
-			$result = $product->deleteSelf();
-
-			if (isset($result['error'])) {
-				$response = $response->withJson($result, 500);
-			} else {
-				$response = $response->withJson($result, 200);
-			}
-
-			return $response;
-		});
-	}
 
 	/**
 	 * Register "update" route
@@ -117,6 +106,16 @@ class ProductController
 			return $product->updateSelf();
 		});
 	}
+
+	/**
+	 * Get name of table
+	 *
+	 * @return string Name of table in database
+	 */
+	protected function getTableName() {
+		return $this->tableName;
+	}
+
 
 }
 
