@@ -21,7 +21,6 @@ class ProductController extends RestController
 	 * @param [type] $app
 	 */
 	function __construct($app) {
-
 		$this->app = $app;
 
 		parent::__construct($this->tableName);
@@ -35,9 +34,6 @@ class ProductController extends RestController
 		$this->registerSingle();
 
 		$this->registerDelete();
-
-
-
 	}
 
 	/**
@@ -51,9 +47,6 @@ class ProductController extends RestController
 			return $result;
 		});
 	}
-
-
-
 
 	/**
 	 * Register "update" route
@@ -76,8 +69,6 @@ class ProductController extends RestController
 	protected function getTableName() {
 		return $this->tableName;
 	}
-
-
 }
 
 
