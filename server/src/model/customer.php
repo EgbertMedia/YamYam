@@ -23,7 +23,15 @@ class Customer extends ModelParent
 	}
 
 	/**
-	 * [create description]
+	 * Create new
+	 *
+	 * @param string $name Name
+	 * @param string $customer_id Customer id
+	 * @param string $phone Phone
+	 * @param string $iban Iban
+	 * @param string $address Address
+	 * @param string $postal_code Postal code
+	 * @param string $city City
 	 *
 	 * @return bool             	Returns true if successful
 	 */
@@ -41,9 +49,9 @@ class Customer extends ModelParent
 	}
 
 	/**
-	 * [updateSelf description]
+	 * Update self
 	 *
-	 * @return [type] [description]
+	 * @return bool Return true is successful
 	 */
 	public function updateSelf() {
 		parse_str(file_get_contents('php://input','r'), $data);
