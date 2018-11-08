@@ -30,7 +30,8 @@ abstract class RestController
 			$response = $response->withHeader('Content-type', 'application/json');
 
 			$ucstring = ucfirst($tableName);
-			$result = $ucstring::getAll();
+			$product = new $ucstring;
+			$result = $product->getAll();
 
 			if (isset($result['error'])) {
 				$response = $response->withJson($result, 500);
@@ -52,8 +53,8 @@ abstract class RestController
 			$response = $response->withHeader('Content-type', 'application/json');
 
 			$ucstring = ucfirst($tableName);
-			$product = new $ucstring($args['id']);
-			$result = $product->getSelf();
+			$product = new $ucstring();
+			$result = $product->getSelf($args['id']);
 
 			if (isset($result['error'])) {
 				$response = $response->withJson($result, 500);
@@ -75,8 +76,8 @@ abstract class RestController
 			$response = $response->withHeader('Content-type', 'application/json');
 
 			$ucstring = ucfirst($tableName);
-			$item = new $ucstring($args['id']);
-			$result = $item->deleteSelf();
+			$item = new $ucstring();
+			$result = $item->deleteSelf($args['id']);
 
 			if (isset($result['error'])) {
 				$response = $response->withJson($result, 500);

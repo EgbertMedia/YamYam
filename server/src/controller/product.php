@@ -53,11 +53,11 @@ class ProductController extends RestController
 	 */
 	private function registerUpdate() {
 		$this->app->put('/product/{id}', function (Request $request, Response $response, array $args) {
-
+		
 			$response = $response->withHeader('Content-type', 'application/json');
 
-			$product = new Product($args['id']);
-			return $product->updateSelf();
+			$product = new Product();
+			return $product->updateSelf($args['id']);
 		});
 	}
 

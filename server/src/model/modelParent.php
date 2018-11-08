@@ -21,7 +21,7 @@ abstract class ModelParent
 	 *
 	 * @return array Return array of all products
 	 */
-	public static function getAll() {
+	public function getAll() {
 		$db = new Database();
 		$db->prepare("SELECT * FROM ".$this->getTableName());
 		$db->exec();
@@ -31,12 +31,14 @@ abstract class ModelParent
 	/**
 	 * [getSelf description]
 	 *
-	 * @return array Return array with
+	 * @param int $id Id of item to get
+	 *
+	 * @return array Return array with data
 	 */
-	public function getSelf() {
+	public function getSelf($id) {
 		$db = new Database();
 		$db->prepare("SELECT * FROM ".$this->getTableName()." WHERE id = :id");
-		$db->bind(':id', $this->id, PDO::PARAM_INT);
+		$db->bind(':id', $id, PDO::PARAM_INT);
 		$db->exec();
 		return $db->getSingle();
 	}
@@ -44,12 +46,14 @@ abstract class ModelParent
 	/**
 	 * [deleteSelf description]
 	 *
+	 * @param int $id Id of item to delete
+	 *
 	 * @return bool true if success
 	 */
-	public function deleteSelf() {
+	public function deleteSelf($id) {
 		$db = new Database();
 		$db->prepare("DELETE FROM ".$this->getTableName()." WHERE id = :id LIMIT 1");
-		$db->bind(':id', $this->id, PDO::PARAM_INT);
+		$db->bind(':id', $id, PDO::PARAM_INT);
 		return $db->exec();
 	}
 }

@@ -6,11 +6,10 @@
 class Product extends ModelParent
 {
 	/**
-	 * @param int $id Id of product
+	 *
 	 */
 
-	function __construct($id) {
-		$this->id = $id;
+	function __construct() {
 		$this->tableName = 'product';
 	}
 
@@ -38,7 +37,6 @@ class Product extends ModelParent
 		$db->bind(':product_id', $product_id, PDO::PARAM_STR);
 		$db->bind(':name', $name, PDO::PARAM_STR);
 		$db->bind(':price', $price, PDO::PARAM_STR);
-		echo "string";
 		return $db->exec();
 	}
 
