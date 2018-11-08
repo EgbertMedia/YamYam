@@ -3,7 +3,7 @@
 /**
  * Class for add, get and update product
  */
-class Product
+class Product extends ModelParent
 {
 	/**
 	 * @param int $id Id of product
@@ -11,6 +11,16 @@ class Product
 
 	function __construct($id) {
 		$this->id = $id;
+		$this->tableName = 'product';
+	}
+
+	/**
+	 * Get name of table
+	 *
+	 * @return string Name of table in database
+	 */
+	protected function getTableName() {
+		return $this->tableName;
 	}
 
 	/**
@@ -30,31 +40,6 @@ class Product
 		$db->bind(':price', $price, PDO::PARAM_STR);
 		echo "string";
 		return $db->exec();
-	}
-
-	/**
-	 * [getAll description]
-	 *
-	 * @return array Return array of all products
-	 */
-	public static function getAll() {
-		$db = new Database();
-		$db->prepare("SELECT * FROM product");
-		$db->exec();
-		return $db->getAll();
-	}
-
-	/**
-	 * [getSelf description]
-	 *
-	 * @return array Return array with
-	 */
-	public function getSelf() {
-		$db = new Database();
-		$db->prepare("SELECT * FROM product WHERE id = :id");
-		$db->bind(':id', $this->id, PDO::PARAM_INT);
-		$db->exec();
-		return $db->getSingle();
 	}
 
 	/**
@@ -80,7 +65,7 @@ class Product
 		}
 
 		$db = new Database();
-		
+
 		$db->prepare("UPDATE product SET ".implode(', ', $params)." WHERE id = :id LIMIT 1");
 
 		$db->bind(':id', $this->id, PDO::PARAM_INT);
@@ -89,18 +74,6 @@ class Product
 			$db->bind($key, $data[$key], PDO::PARAM_STR);
 		}
 
-		return $db->exec();
-	}
-
-	/**
-	 * [deleteSelf description]
-	 *
-	 * @return [type] [description]
-	 */
-	public function deleteSelf() {
-		$db = new Database();
-		$db->prepare("DELETE FROM product WHERE id = :id LIMIT 1");
-		$db->bind(':id', $this->id, PDO::PARAM_INT);
 		return $db->exec();
 	}
 }
